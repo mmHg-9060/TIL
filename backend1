@@ -18,18 +18,15 @@ Hello.java를 개발자가 작성 -> javac를 사용, .class 파일이 생성되
 
 
 [Hello java 출력하기]
-```Java
 public class HelloJava { // public class (파일명)에서 파일명 부분은 파일명과 대소문자 맞추기
     public static void main(String[] args) { // String[] 부분 S 대문자
         System.out.println("Hello java"); // sout 치면 완성은 되는데 System.out.println System 대문자 + (아마 파이썬에서 print?)
     }
 }
-```
 
 들여쓰기는 스페이스 4번과 같고, 안 써도 작동은 한다.
 
 [주석]
-```Java
 public class CommentJava {
     public static void main(String[] args) {
         System.out.println("hello java1"); // hello java1을 출력합니다.
@@ -41,13 +38,11 @@ public class CommentJava {
         */
     }
 }
-```
 
 한 줄 주석(single line comment): // 기호로 시작하고, 이 기호 이후의 모든 텍스트는 주석으로 처리됨
 여러 줄 주석(multi line commnet): /* ... */으로 쓰고, 이 사이의 모든 텍스트는 주석으로 처리됨
 
 [변수]
-```Java
 package variable;
 
 public class Var1 {
@@ -57,11 +52,9 @@ public class Var1 {
         System.out.println(10);
     }
 }
-```
 
 지금은 10을 3번 출력하는 코드인데, 이후에 20을 3번 출력하는 코드를 짜야 한다면 어떨까? 아래와 같이
 
-```Java
 package variable;
 
 public class Var1 {
@@ -71,13 +64,11 @@ public class Var1 {
         System.out.println(20); // 10 -> 20
     }
 }
-```
 
 처럼 System.out.println(10);을 System.out.println(20);으로 세 번만 바꿔주면 된다.
 하지만 이와 같이 짧은 코드에서는 이렇게 해도 별 상관은 없겠지만, 이런걸 100번, 1000번 출력하는 코드를 짜야 한다면 어떨까?
 변수를 사용하면 몇 번을 출력해야 하든 쉽게 할 수 있다.
 
-```Java
 package variable;
 
 public class Var2 {
@@ -89,10 +80,9 @@ public class Var2 {
         System.out.println(a);
     }
 }
-```
+
 를
 
-```Java
 package variable;
 
 public class Var2 {
@@ -104,9 +94,7 @@ public class Var2 {
         System.out.println(a);
     }
 }
-```
 
-```Java
 package variable;
 
 public class Var4 {
@@ -116,14 +104,12 @@ public class Var4 {
         int c, d; // 이거는 한 줄에 두 개 이상씩 선언
     }
 }
-```
 
 처럼 한 번에 두 개 이상씩 선언해야 한다면,
 int a;
 int b; 보다는
 int a, b; 가 더 낫다
 
-```Java
 package variable;
 
 public class Var5 {
@@ -138,12 +124,10 @@ public class Var5 {
         System.out.println(d);
     }
 }
-```
 
 이 바로 앞 코드와 같이 두 개 이상의 코드를 선언만 할 수 있는 것이 아닌,
 두 개 이상의 코드를 선언과 동시에 초기화까지 같이 할 수 있다.
 
-```Java
 package variable;
 
 public class Var6 {
@@ -152,7 +136,6 @@ public class Var6 {
         System.out.println(a);
     }
 }
-```
 --> java: variable a might not have been initialized
 이 코드는 --> 뒤의 내용의 오류 내용이 나오게 되는데,
 이 버그는 초기화를 하지 않은 변수를 쓰려고 해서 자바가 거부하는 경우다 + 이 버그는 컴파일 오류로, 다른 버그들보다 더 쉽게 찾아낼 수 있다.
@@ -162,7 +145,6 @@ public class Var6 {
 + 지금까지 쓴 변수는 전부 지역 변수(Local Variable)인데, 이 변수는 직접 초기화를 시켜줘야 함
 이후 배울 클래스 변수(Class Variable)과 인스턴스 변수(Instance Variable)는 자바가 알아서 초기화를 진행해준다.
 
-```Java
 package variable;
 
 public class Var7 {
@@ -180,7 +162,6 @@ public class Var7 {
         System.out.println(e);
     }
 }
-```
 int: 정수를 다룬다. (C에서 int)
 double: 실수를 다룬다. (C에서 float)
 boolean: 불리언(참/거짓)을 다룬다. (C에서 stdbool.h 사용 후의 bool)
@@ -191,7 +172,6 @@ ex) int a = "Hello";, boolean a = 3.14 등등
 + 개발자가 코드에 직접 넣은 값들을 리터럴이라고 한다.
 + type, 형식, 형은 같은 말이다. (int type == int 형식 == int 형)
 
-```Java
 package variable;
 
 public class Var8 {
@@ -208,7 +188,6 @@ public class Var8 {
         double d = 10.0; // 15자리 정밀도
     }
 }
-```
 리터럴 타입은 기본으로 정수는 int, 실수는 double을 자주 쓴다.
 나머지 타입들이 거의 사용되지 않는 이유:
 byte: 표현 길이가 너무 작다
@@ -256,7 +235,6 @@ stdentCount, maxScore, userAccount, orderCount와 같은 변수는 의미도 있
 
 [문제 풀기]
 1. 변수 num1, num2를 사용해서, num1+num2, num1-num2, num1*num2를 출력하는 코드를 작성하시오.
-```Java
 package variable.ex;
 public class VarEx1Question {
     public static void main(String[] args) {
@@ -267,10 +245,8 @@ public class VarEx1Question {
         System.out.println(num1 * num2);
     }
 }
-```
 
 2. num1을 선언하고, 이에 10을 할당하고, num2를 선언하고 이에 20을 할당하고, 그 결과를 새로운 변수 sum에 저장한 다음, sum 변수의 값을 출력하여라.
-```Java
 package variable.ex;
 public class VarEx2 {
     public static void main(String[] args) {
@@ -281,9 +257,8 @@ public class VarEx2 {
         System.out.println(sum);
     }
 }
-```
+
 3. long 타입의 변수를 선언하고, 그 변수를 10000000000으로 초기화 후 출력하고, boolean 타입의 변수를 선언하고, 그 변수를 true로 초기화한 후 출력하는 프로그램을 작성하시오.
-```Java
 package variable.ex;
 public class VarEx3 {
     public static void main(String[] args) {
@@ -293,7 +268,7 @@ public class VarEx3 {
         System.out.println(b);
     }
 }
-```
+
 [연산자]
 +, -, *, /와 같이 계산을 수행하는 기호를 연산자라 학, 자바에는 다양한 연산자가 있다.
 산술 연산자: +(더하기), -(빼기), *(곱하기), /(나누기, A/B일 때 B가 0인 케이스 조심!), %(나머지)
@@ -306,7 +281,6 @@ public class VarEx3 {
 피연산자: 연산 대상 (3+4에서 3, 4)
 
 [연산자 실습]
-```Java
 package operator;
 
 public class Operator1 {
@@ -335,7 +309,6 @@ public class Operator1 {
         System.out.println("a % b = " + mod);
     }
 }
-```
 이렇게 연산자와 변수를 사용해서 덧셈, 뺄셈, 곱셈, 나눗셈, 나머지를 전부 출력하는 코드를 짤 수 있다!
 
 추가로 5/2는 수학적으로는 2.5지만, 결과는 소수점이 제거된 2가 나온다.
@@ -344,7 +317,6 @@ public class Operator1 {
 이것은 실무와 알고리즘 모두 종종 사용된다고 한다.
 
 [문자열 더하기]
-```Java
 package operator;
 
 public class Operator2 {
@@ -371,9 +343,8 @@ public class Operator2 {
         System.out.println(result4);
     }
 }
-```
+
 [연산자 우선순위]
-```Java
 package operator;
 
 public class Operator3 {
@@ -384,8 +355,7 @@ public class Operator3 {
         System.out.println("sum2 = " + sum2);
     }
 }
-```
-```Java
+
 package operator;
 
 public class Operator4 {
@@ -396,7 +366,7 @@ public class Operator4 {
         System.out.println("sum4 = " + sum4);
     }
 }
-```
+
 우선순위대로 쓰면
 
 1. 괄호: ()
@@ -415,7 +385,6 @@ public class Operator4 {
 2. 애매하면 일단 괄호를 사용
 
 [증감 연산자]
-```Java
 package operator;
 
 public class OperatorAdd1 {
@@ -431,7 +400,7 @@ public class OperatorAdd1 {
         System.out.println("a = " + a);
     }
 }
-```
+
 [전위/후위 연산자]
 ++a: 증감 연산자를 피연산자 앞에 둔다. 이것을 앞에 있다고 해서 전위 증감 연산자라 한다. 연산하기 전에 먼저 증감을 해준 뒤 그 값을 연산에 사용한다.
 a가 4일 때
@@ -450,7 +419,6 @@ int b = a++ + 3의 결과는 b=4+3=7이다.
 ==: 같은지(True), 다른지(False) 확인하는 비교
 
 [숫자 비교]
-```Java
 package operator;
 
 public class Comp1 {
@@ -468,13 +436,11 @@ public class Comp1 {
         System.out.println("boolean 사용: " + result);
     }
 }
-```
 
 [문자열 비교]
 문자열이 같은지 비교할 때는 ==이 아닌 .equals() 메서드를 사용한다.
 ==을 사용하면 성공할 때도 있고 실패할 때도 있는 복불복이 되어버리고, 이걸 알기 위해선 좀 어려우므로, 지금은 단순히 .equals()로 문자열 비교를 한다는 것만 알아두자.
 
-```Java
 package operator;
 
 public class Comp2 {
@@ -489,10 +455,8 @@ public class Comp2 {
         System.out.println("result3 = " + result3);
     }
 }
-```
 
 [논리 연산자]
-```Java
 package operator;
 
 public class Logical1 {
@@ -520,14 +484,12 @@ public class Logical1 {
         System.out.println(!b); //0'=1, true
     }
 }
-```
 &&: 두 피연산자가 모두 참이어야 true를 반환하고, 둘 중 하나라도 거짓이면 false를 반환한다.
 ||: 두 피연산자 중 하나라도 참이면 true를 반환하고, 둘 다 거짓이면 false를 반환한다.
 !: 피연산자의 논리적 부정을 반환한다. 참이면 거짓을, 거젓이면 참을 반환한다.
 
 [논리 연산자의 활용]
 변수 a가 10보다 크고 20보다 작은지 논리 연산자를 사용해서 확인해보자.
-```Java
 package operator;
 
 public class Logical2 {
@@ -537,4 +499,3 @@ public class Logical2 {
         System.out.println("result = " + result);
     }
 }
-```
