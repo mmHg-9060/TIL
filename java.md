@@ -539,3 +539,230 @@ public class Logical2 {
     }
 }
 ```
+```Java
+package operator;
+
+public class Assign1 {
+    public static void main(String[] args) {
+        int a = 5; // a = 5
+        a += 3; // a = 5 + 3 = 8
+        a -= 2; // a = 8 - 2 = 6
+        a *= 4; // a = 6 * 4 = 24
+        a /= 3; // a = 24 / 3 = 8
+        a %= 5; // a = 8 % 5 = 3
+        System.out.println(a);
+    }
+}
+```
+[문제와 풀이]  
+1번 문제
+1. num1, num2, num3라는 이름의 세 개의 int 변수를 선언하고, 각각 10, 20, 30으로 초기화하세요.
+2. 세 변수의 합을 계산하고, 그 결과를 sum이라는 이름의 int 변수에 저장하세요.
+3. 세 변수의 평균을 계산하고, 그 결과를 average라는 이름의 int 변수에 저장하세요. 또한 평균 계산시 소수점 이하의 결과는 버림하세요.
+4. sum과 average 변수의 값을 출력하세요.
+```Java
+package operator;
+
+public class OperationEx1 {
+    public static void main(String[] args) {
+        int num1 = 10;
+        int num2 = 20;
+        int num3 = 30;
+        int sum = num1+num2+num3;
+        System.out.println("sum = " + sum);
+        int average = sum/3;
+        System.out.println("average = " + average);
+    }
+
+}
+```
+
+2번 문제
+1. val1, val2, val3라는 이름의 세 개의 double 변수를 선언하고, 각각 1.5, 2.5, 3.5로 초기화하세요.
+2. 세 변수의 합을 계산하고, 그 결과를 sum이라는 이름의 double 변수에 저장하세요.
+3. 세 변수의 평균을 계산하고, 그 결과를 average라는 이름의 double 변수에 저장하세요.
+4. sum과 average 변수의 값을 출력하세요.
+```Java
+package operator;
+
+public class OperationEx2 {
+    public static void main(String[] args) {
+        double val1 = 1.5;
+        double val2 = 2.5;
+        double val3 = 3.5;
+        double sum = val1 + val2 + val3;
+        System.out.println("sum = " + sum);
+        double average = sum / 3;
+        System.out.println("average = " + average);
+    }
+}
+```
+
+3번 문제
+1. int형 변수 score를 선언하세요.
+2. score가 80점 이상이고, 100점 이하면 true를 출력하고, 아니면 false를 출력하세요.
+```Java
+package operator;
+
+public class OperationEx3 {
+    public static void main(String[] args) {
+        int score = 80;
+        boolean result = 80 <= score && score <= 100;
+        System.out.println(result);
+    }
+}
+```
+
+[조건문]
+조건문:  
+지금까지 봤던 프로그램은 단순히 위에서 아래로 순서대로 한 줄 씩 실행되었다.  
+조건이 참이냐 거짓이냐로 다른 코드를 실행하려면, 어떻게 해야 할까?  
+예를 들어, 18살 이상은 "성인입니다."를, 이외의 경우에는 "미성년자입니다."를 출력하는 코드는 어떻게 해야 할까?
+
+한국어로만 하면
+```
+만약 (나이 >= 18)면 "성인입니다."
+만약 (나이 < 18)면 "미성년자입니다."
+```
+
+영어로 하면
+```
+if (age >= 18) "성인입니다."
+if (age < 18) "미성년자입니다."
+
+이렇게 특정 조건에 따라 다른 코드를 실행하는 것을 조건문이라고 하고,  
+조건문에는 if문과 switch문이 있는데, 둘 다 특정 조건에 따라 다른 코드를 실행하는 것이라 생각하면 된다.
+
+[if]  
+if문은 특정 조건이 참인지 확인하고, 그 조건이 참일 경우, 코드 블록을 실행하는 코드이다.
+```Java
+package cond;
+
+public class If1 {
+    public static void main(String[] args) {
+        int age = 16; // 사용자 나이
+        if (age >= 18) { // age = 20, 20 >= 18은 true이므로 아래 중괄호{}로 묶인 코드 실행
+            System.out.println("성인입니다.");
+        }
+        if (age < 18) { // age = 20, 20 < 18은 false이므로, 아래 증괄호로 묶인 코드 실행 안 함
+            System.out.println("미성년자입니다.");
+        }
+    }
+}
+```
+[else]
+else문은 if문에서 참이 되는 조건이 없을 때 실행되는 코드를 제공한다.  
+이 else문을 사용하면, 앞의 if문으로만 짤 때와는 달리, 좀 더 간략하게 쓸 수 있다.  
+```Java
+package cond;
+
+public class If2 {
+    public static void main(String[] args) {
+        int age = 16;
+        if (age >= 18) {
+            System.out.println("성인입니다.");
+        }
+        else {
+            System.out.println("미성년자입니다.");
+        }
+    }
+}
+```
+
+[else-if]
+문제: 당신은 연령에 따라 다른 메시지를 출력하는 프로그램을 작성해야 한다.  
+이 프로그램은 int age라는 변수를 사용해야 하며, 연령에 따라 다음의 출력을 해야 한다.
+- 7세 이하의 경우: "미취학"
+- 8세 이상, 13세 이하일 경우: "초등학생"
+- 14세 이상 16세 이하일 경우: "중학생"
+- 17세 이상 19세 이하일 경우: "고등학생"
+- 20세 이상일 경우: "성인"
+```Java
+package cond;
+
+public class If3 {
+    public static void main(String[] args) {
+        int age = 14;
+        if (age <= 7) {
+            System.out.println("미취학");
+        }
+        else if (8 <= age && age <= 13) {
+            System.out.println("초등학생");
+        }
+        else if (14 <= age && age <= 16) {
+            System.out.println("중학생");
+        }
+        else if (17 <= age && age <= 19) {
+            System.out.println("고등학생");
+        }
+        else {
+            System.out.println("성인");
+        }
+    }
+}
+```
+이 코드는 사실 연관성 있는 조건을 두 번 씩 검사한다.  
+예를 들어, 첫 번째 if문과 그 다음의 else if를 봐보자.  
+첫 번째 if문에서 age가 7 이하가 아님을 알았을 때, 우리는 age가 8 이상임을 알 수 있지만,  
+else if문의 조건을 보면, age가 8 이상인지 또 다시 확인하고 있다.  
+이것을 최적화를 해보면  
+```Java
+package cond;
+
+public class If3 {
+    public static void main(String[] args) {
+        int age = 14;
+        if (age <= 7) {
+            System.out.println("미취학");
+        }
+        else if (age <= 13) {
+            System.out.println("초등학생");
+        }
+        else if (age <= 16) {
+            System.out.println("중학생");
+        }
+        else if (age <= 19) {
+            System.out.println("고등학생");
+        }
+        else {
+            System.out.println("성인");
+        }
+    }
+}
+```
+이 된다.
+
+[if, else if]  
+if문에 else if를 함께 사용하는 것은 서로 연관된 조건일 때 사용한다. 그런데 서로 관련 없는 독립 조건이면 else if를 사용하지 않고, if문을 각각 따로 사용해야 한다.
+
+문제: 온라인 쇼핑몰의 할인 시스템을 개발해야 한다. 한 사용자가 어떤 상품을 구매할 때, 다양한 할인 조건에 따라 총 할인 금액이 달라지게 한다.
+각각의 할인 조건은 다음과 같다.
+1. 물품 가격이 10000원 이상일 때, 1000원 할인
+2. 나이가 10살 이하일 때 1000원 할인
+이 할인 시스템의 경우, 한 사용자가 두 개의 할인을 동시에 받을 수 있다.  
+예를 들어, 10살인 사용자가 10000원짜리 물품을 구매할 때, 1번 조건(price >= 10000)에 의해 1000원 할인, 2번 조건(age >= 10)에 의해 1000원 할인으로 총 2000원을 할인받을 수 있고, 다음은 그 코드이다.  
+```Java
+package cond;
+
+public class If5 {
+    public static void main(String[] args) {
+        int price = 10000;
+        int age = 10;
+        int discount = 0;
+        if (price >= 10000) {
+            discount += 1000;
+            System.out.println("10000원 이상 구매, 1000원 할인");
+        }
+        if(age >= 10) {
+            discount += 1000;
+            System.out.println("어린이 1000원 할인");
+        }
+        System.out.println("총 할인 금액: " + discount + "원");
+    }
+}
+
+```
+보면, price가 10000보다 크거나 같은 것이 참이니까 discount에는 1000이 더해진다.  
+이 다음 age가 10보다 작거나 같은 것이 참이니까 discount에는 1000이 더해져서 총 discount는 2000이 된다.
+
+이번 코드에는 각각 독립된 
