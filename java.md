@@ -793,3 +793,78 @@ public class If6 {
 if문을 각각 사용할지, if와 else if, else를 함께 묶어서 사용할 지는 요구 사항에 따라 다르다.  
 둘의 차이를 이해하고 적절하게 사용하면 된다.  
 [switch]
+회원 등급에 따라 다른 쿠폰을 발급하는 프로그램을 작성해야 한다.  
+이 프로그램은 int grade라는 변수를 사용하며, 회원 등급에 따라 다음 표에 맞는 쿠폰을 발급받는다.
+1. grade 1: 쿠폰 1000
+2. grade 2: 쿠폰 2000
+3. grade 3: 쿠폰 3000
+4. 이외 등급: 쿠폰 500
+
+각 쿠폰이 할당된 뒤에는 "발급받은 쿠폰 " + 쿠폰값을 출력해야 한다.  
+예를 들어, 2등급 사용자의 출력 예시는 다음과 같다:  
+발급받은 쿠폰 2000  
+if문을 사용해서 코드를 작성해보자.  
+```Java
+package cond;
+
+public class Switch1 {
+    public static void main(String[] args) {
+        int grade = 2;
+        int coupon;
+        if (grade == 1) {
+            coupon = 1000;
+        }
+        else if (grade == 2) {
+            coupon = 2000;
+        }
+        else if (grade == 3) {
+            coupon = 3000;
+        }
+        else {
+            coupon = 500;
+        }
+        System.out.println("발급받은 쿠폰 " + coupon);
+    }
+}
+```
+이제 배울 switch문은 앞서 배운 if문을 좀 더 편리하게 사용할 수 있는 기능이다.  
+if문은 비교 연산자를 사용해서 같은지 비교해야 하지만, switch문은 단순히 값이 같은지만 비교할 수 있다.  
+switch문은 조건식에 해당하는 특정 값으로 실행할 코드를 선택하고, switch의 형식은 다음과 같다.  
+```Java
+switch (조건식) {
+    case value1:
+        ... // 조건식의 결과 값이 value 1일 때 실행할 코드
+        break;
+    case value2:
+        ... // 조건식의 결과 값이 value 2일 때 실행할 코드
+        break;
+    default:
+        ... // 위 조건식 중 그 어떤 값도 해당하지 않을 때 실행되는 코드 (아마도 else문과 동일)
+```
+이제, 앞서 있었던 등급을 사용해서 쿠폰을 발행하는 코드를 switch문으로 작성하면
+```Java
+package cond;
+
+public class Switch2 {
+    public static void main(String[] args) {
+        int grade = 2;
+        int coupon;
+        switch (grade) {
+            case 1:
+                coupon = 1000;
+                break;
+            case 2:
+                coupon = 2000;
+                break;
+            case 3:
+                coupon = 3000;
+                break;
+            default:
+                coupon = 500;
+                break;
+        }
+        System.out.println("발급받은 쿠폰: " + coupon);
+    }
+}
+```
+으로 작성할 수 있다.
