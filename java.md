@@ -1,0 +1,870 @@
+# TIL
+백엔드: 사용자의 눈에 보이지 않는 뒷면의 모든 로직을 담당함  
+주요 언어: Java, Python 등등  
+
+[자바]
+자바는 대소문자를 구분한다. (대소문자 다르면 오류남)  
+자바는 표준 스펙, 구현으로 나눌 수 있다.  
+자바 표준 스펙:  
+  자바를 어떻게 만들어야 하는지에 대한 설계도이자 문서  
+  표준 스펙을 기반으로 여러 회사에서 자바를 만듦  
+  자바 표준 스펙은 JCP(자바 커뮤니티 프로세스)를 통해 관리됨  
+ 자바 구현:  
+  자바 표준 스펙에 맞춰 자바 프로그램 개발  
+  장단점이 존재하는데, 예를 들어서 Amazon Correctto는 AWS에 최적화 되어 있다.  
+  또한 각 회사들은 대부분 다양한 OS에서 작동하는 버전의 자바도 같이 제공한다.  
++ 자바 구현들은 모두 표준 스펙에 맞도록 개발되어 있으므로, 다른 구현체로 변경하더라도 대부분 문제 없이 작동한다.  
+컴파일-실행 과정  
+Hello.java를 개발자가 작성 -> javac를 사용, .class 파일이 생성되고, 코드를 바이트 코드로 변환하며 최적화와 문법 오류를 검출 -> java 프로그램 사용, 자바 가상 머신이 실행되면서 프로그램이 작동됨  
+
+
+[Hello java 출력하기]
+```Java
+public class HelloJava { // public class (파일명)에서 파일명 부분은 파일명과 대소문자 맞추기
+    public static void main(String[] args) { // String[] 부분 S 대문자
+        System.out.println("Hello java"); // sout 치면 완성은 되는데 System.out.println System 대문자 + (아마 파이썬에서 print?)
+    }
+}
+```
+
+들여쓰기는 스페이스 4번과 같고, 안 써도 작동은 한다.  
+
+[주석]
+```Java
+public class CommentJava {
+    public static void main(String[] args) {
+        System.out.println("hello java1"); // hello java1을 출력합니다.
+        // System.out.println("hello java2"); // 문법이 맞는 코드 내용이지만, // 기호때문에 주석 처리가 되면서 실행되지 않음
+
+        /*
+        System.out.println("hello java3"); // 이 줄과
+        System.out.println("hello java4"); // 이 줄이 /* ... */ 구문에 의해 주석처리가 됨
+        */
+    }
+}
+```
+
+한 줄 주석(single line comment): // 기호로 시작하고, 이 기호 이후의 모든 텍스트는 주석으로 처리됨  
+여러 줄 주석(multi line commnet): /* ... */으로 쓰고, 이 사이의 모든 텍스트는 주석으로 처리됨  
+
+[변수]
+```Java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        System.out.println(10); 
+        System.out.println(10);
+        System.out.println(10);
+    }
+}
+```
+
+지금은 10을 3번 출력하는 코드인데, 이후에 20을 3번 출력하는 코드를 짜야 한다면 어떨까? 아래와 같이  
+
+```Java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        System.out.println(20); // 10 -> 20
+        System.out.println(20); // 10 -> 20
+        System.out.println(20); // 10 -> 20
+    }
+}
+```
+
+처럼 System.out.println(10);을 System.out.println(20);으로 세 번만 바꿔주면 된다.  
+하지만 이와 같이 짧은 코드에서는 이렇게 해도 별 상관은 없겠지만, 이런걸 100번, 1000번 출력하는 코드를 짜야 한다면 어떨까?  
+변수를 사용하면 몇 번을 출력해야 하든 쉽게 할 수 있다.  
+
+```Java
+package variable;
+
+public class Var2 {
+    public static void main(String[] args) {
+        int a; // 정수형(int)를 가지는 변수 a를 선언함.
+        a = 10; // a라는 변수에 10을 넣음(초기화)
+        System.out.println(a);
+        System.out.println(a);
+        System.out.println(a);
+    }
+}
+```
+를  
+
+```Java
+package variable;
+
+public class Var2 {
+    public static void main(String[] args) {
+        int a;
+        a = 20; // a가 이번엔 10이 아닌 20으로 초기화
+        System.out.println(a);
+        System.out.println(a);
+        System.out.println(a);
+    }
+}
+```
+
+```Java
+package variable;
+
+public class Var4 {
+    public static void main(String[] args) {
+        int a; // 이거랑
+        int b; // 이거는 하나씩 선언
+        int c, d; // 이거는 한 줄에 두 개 이상씩 선언
+    }
+}
+```
+
+처럼 한 번에 두 개 이상씩 선언해야 한다면,  
+int a;  
+int b; 보다는  
+int a, b; 가 더 낫다  
+
+```Java
+package variable;
+
+public class Var5 {
+    public static void main(String[] args) {
+        int a; // 이것은
+        a = 1; // 선언과 초기화를 따로
+        System.out.println(a);
+        int b = 2; // 이것은 선언과 초기화를 동시에
+        System.out.println(b);
+        int c = 3, d = 4; // 이것은 두 개 이상을 선언과 초기화를 동시에
+        System.out.println(c);
+        System.out.println(d);
+    }
+}
+```
+
+이 바로 앞 코드와 같이 두 개 이상의 코드를 선언만 할 수 있는 것이 아닌,  
+두 개 이상의 코드를 선언과 동시에 초기화까지 같이 할 수 있다.  
+
+```Java
+package variable;
+
+public class Var6 {
+    public static void main(String[] args) {
+        int a;
+        System.out.println(a);
+    }
+}
+```
+--> java: variable a might not have been initialized  
+이 코드는 --> 뒤의 내용의 오류 내용이 나오게 되는데,  
+이 버그는 초기화를 하지 않은 변수를 쓰려고 해서 자바가 거부하는 경우다 + 이 버그는 컴파일 오류로, 다른 버그들보다 더 쉽게 찾아낼 수 있다.  
+왜냐하면 몇 번 라인의 몇 번째 문자가 문제인지 알려주기 때문이다.  
+이런 버그가 뜨는 이유는, 변수를 선언하면 메모리상의 어떤 공간을 차지하고 사용하게 되는데  
+그 공간에 기존에 어떤 값이 있었는지 그 누구도 모르기 때문에 초기화를 하지 않으면 이상한 값이 출력될 수 있음 -> 그래서 자바는 변수 초기화를 강제함  
++ 지금까지 쓴 변수는 전부 지역 변수(Local Variable)인데, 이 변수는 직접 초기화를 시켜줘야 함  
+이후 배울 클래스 변수(Class Variable)과 인스턴스 변수(Instance Variable)는 자바가 알아서 초기화를 진행해준다.  
+
+```Java
+package variable;
+
+public class Var7 {
+    public static void main(String[] args) {
+        int a = 100; // 이것은 정수
+        double b = 10.5; // 이것은 실수
+        boolean c = true; // 이것은 불, True 혹은 False만 입력 가능
+        char d = 'A'; // 문자 하나
+        String e = "Hello Java"; // 문자열, 혼자서만 String, 대문자로 시작한다.
+
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        System.out.println(d);
+        System.out.println(e);
+    }
+}
+```
+int: 정수를 다룬다. (C에서 int)  
+double: 실수를 다룬다. (C에서 float)  
+boolean: 불리언(참/거짓)을 다룬다. (C에서 stdbool.h 사용 후의 bool)  
+char: 문자 하나를 다루고, 작은따옴표(')을 사용해서 감싼다. (C에서의 char, 하지만 C의 char보다 1Byte 더 큰 2Byte 형식이다.)  
+String: 문자열을 다루고, 큰따옴표(")을 사용해서 감싸고, 유일하게 대문자로 시작한다. (C에서의 문자들의 배열(char[])과 유사하지만, 마지막 자리에 \0(Null) 자리가 필요하지 않고, length같은 메서드가 없는 등, 차이가 좀 많이 크다.)  
++ 각 변수는 지정된 타입에 맞는 값을 사용해야 하고, 지정된 타입에 맞지 않는 코드는 컴파일 오류가 발생한다.  
+ex) int a = "Hello";, boolean a = 3.14 등등  
++ 개발자가 코드에 직접 넣은 값들을 리터럴이라고 한다.  
++ type, 형식, 형은 같은 말이다. (int type == int 형식 == int 형)  
+
+```Java
+package variable;
+
+public class Var8 {
+    public static void main(String[] args) {
+        // 정수
+        byte b = 127; // 범위: -128 ~ 127
+        short s = 32767; // 범위: -32,768 ~ 32,767
+        int i = 2147483647; // 범위: -2,147,483,648(약 -21억) ~ 2,147,483,647(약 21억)
+        long l = 9223372036854775807L; // 꼭 리터럴 뒤에 l이나 L 붙여야 하지만, 보통은 L을 붙인다.
+        // 범위: -9,223,372,036,854,775,808(약 -922경) ~ 9,223,372,036,854,775,807 (약 922경)
+
+        // 실수
+        float f = 10.0f; // 7자리 정밀도, 실무에서 잘 안 쓰임(오차가 더 잘 생김)
+        double d = 10.0; // 15자리 정밀도
+    }
+}
+```
+리터럴 타입은 기본으로 정수는 int, 실수는 double을 자주 쓴다.  
+나머지 타입들이 거의 사용되지 않는 이유:  
+byte: 표현 길이가 너무 작다  
+short: 표현 길이가 너무 작다  
+float: 표현 길이와 정밀도가 낮다  
+char: 문자 하나만 따로 표현하는 경우는 거의 없다.  
+
+자주 사용되는 타입  
+실무에서 자주 사용되는 타입은 int, long, double, boolean(true/false), String이 있다.  
+정수 - int, long: 자바는 정수에 기본적으로 int, 21억을 넘을 것 같으면 long  
++ 파일을 다룰 때에는 byte를 사용한다.  
+실수 - double: 실수는 고민도 하지 않고 double을 쓰면 된다.  
+불린형 - boolean: true, false 참 거짓을 표현하고, 이후 조건문에서 자주 사용된다.  
+문자열 - String: 문자를 다룰 때, 문자가 하나든, 문자열이든 모두 String을 쓰는 것이 더 편리하다.  
+
+[변수 명명 규칙]
+자바에서 변수의 이름을 짓는 데에는 규칙과 관례가 있다.  
+규칙은 필수고, 규칙을 지키지 않으면 컴파일 오류가 발생한다.  
+관례는 필수는 아니지만, 거의 모든 개발자가 그 관례를 따르기 때문에 사실상 규칙이라고 생각해도 된다.  
+
+규칙:  
+1. 변수 이름은 숫자로 시작할 수 없다. (ex: 1num, 1st 등)
+2. 이름에는 공백이 들어갈 수 없다. (ex: user name, example num 등)
+3. 자바의 예약어를 변수 이름으로 사용할 수 없다. (ex: int, class, public 등)
+4. 변수 이름에는 영문자(a~z, A~Z), 숫자(0~9), 달러 기호($), 밑줄(_)만 사용할 수 있다.
+
+관례:  
+소문자로 시작하는 낙타 표기법  
+변수 이름은 소문자로 시작하는 것이 일반적이고, 여러 문자로 이루어진 변수 이름의 경우, 소문자로 시작해서 이후의 각 단어는 대문자로 시작하는 낙타 표기법(camel case)를 사용한다. (ex: orderDetail, myAccount 등)  
+
+자바 언어의 관례:  
+클래스는 대문자로 시작, 나머지는 소문자로 시작  
+자바에서 클래스 이름의 첫 글자는 대문자로 시작하고, 나머지는 모두 첫 글자를 소문자로 시작한다.  
+추가로 나머지는 낙타 표기법을 적용하면 된다.  
+예시: 클래스는 첫 글자 대문자, 나머지는 모두 첫 글자 소문자로 시작 + 낙타 표기법  
+클래스: Person, OrderDetail  
+변수를 포함한 나머지: firstName, userAccount  
+예외가 두 개 있는데, 상수와 패키지가 있다.  
+상수는 모두 대문자를 사용하고, 언더바로 구분한다. (ex: USER_LIMIT)  
+패키지는 모두 소문자를 사용한다. (org.spring.boot)  
+
+변수 이름은 의미가 있고, 그 용도를 명확하게 설명해야 한다.  
+a, b, x, y와 같은 변수는 의미도 없고, 용도도 설명하지 않는다. 단순한 예제에서만 사용하자.  
+stdentCount, maxScore, userAccount, orderCount와 같은 변수는 의미도 있고 용도도 명확하게 설명할 수 있다.  
+
+[문제 풀기]
+1. 변수 num1, num2를 사용해서, num1+num2, num1-num2, num1*num2를 출력하는 코드를 작성하시오.  
+```Java
+package variable.ex;
+public class VarEx1Question {
+    public static void main(String[] args) {
+        int num1 = 4;
+        int num2 = 3;
+        System.out.println(num1 + num2);
+        System.out.println(num1 - num2);
+        System.out.println(num1 * num2);
+    }
+}
+```
+
+2. num1을 선언하고, 이에 10을 할당하고, num2를 선언하고 이에 20을 할당하고, 그 결과를 새로운 변수 sum에 저장한 다음, sum 변수의 값을 출력하여라.  
+```Java
+package variable.ex;
+public class VarEx2 {
+    public static void main(String[] args) {
+        int num1 = 10;
+        int num2 = 20;
+        int sum;
+        sum = num1 + num2;
+        System.out.println(sum);
+    }
+}
+```
+3. long 타입의 변수를 선언하고, 그 변수를 10000000000으로 초기화 후 출력하고, boolean 타입의 변수를 선언하고, 그 변수를 true로 초기화한 후 출력하는 프로그램을 작성하시오.  
+```Java
+package variable.ex;
+public class VarEx3 {
+    public static void main(String[] args) {
+        long l = 10000000000L;
+        System.out.println(l);
+        boolean b = true;
+        System.out.println(b);
+    }
+}
+```
+[연산자]
++, -, *, /와 같이 계산을 수행하는 기호를 연산자라 학, 자바에는 다양한 연산자가 있다.  
+산술 연산자: +(더하기), -(빼기), *(곱하기), /(나누기, A/B일 때 B가 0인 케이스 조심!), %(나머지)  
+증감 연산자: ++(+1), --(-1)  
+비교 연산자: ==(두 값이 같은가?), !=(두 값이 다른가?), >(좌변이 우변보다 큰가?), <(좌변이 우변보다 작은가?), >=(좌변이 우변보다 크거나 같은가?), <=(좌변이 우변보다 작거나 같은가?)  
+논리 연산자: &&(And), ||(Or), !(Not)  
+대입 연산자: =(좌변에 우변의 값을 넣음), +=(좌변 = 좌변 + 우변), -=(좌변 = 좌변 - 우변), *=(좌변 = 좌변 * 우변), /=(좌변 = 좌변 / 우변), %=(좌변 = 좌변 % 우변)  
+삼항 연산자: (논리식) ? A : B ((논리식) ? A : B (논리식이 참이면 A, 논리식이 거짓이면 B)  
+연산자: 연산 기호 (위의 산술 연산자 등)  
+피연산자: 연산 대상 (3+4에서 3, 4)  
+
+[연산자 실습]
+```Java
+package operator;
+
+public class Operator1 {
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 2;
+
+        // 덧셈
+        int sum = a + b;
+        System.out.println("a + b = " + sum); // 앞의 따옴표에 있는 'a + b = '을 출력하고, 변수 sum을 같은 줄에 출력한다.
+
+        // 뺄셈
+        int diff = a - b;
+        System.out.println("a - b = " + diff);
+
+        // 곱셈
+        int multi = a * b;
+        System.out.println("a * b = " +  multi);
+
+        // 나눗셈
+        int div = a / b;
+        System.out.println("a / b = " + div);
+
+        // 나머지
+        int mod = a % b;
+        System.out.println("a % b = " + mod);
+    }
+}
+```
+이렇게 연산자와 변수를 사용해서 덧셈, 뺄셈, 곱셈, 나눗셈, 나머지를 전부 출력하는 코드를 짤 수 있다!
+
+추가로 5/2는 수학적으로는 2.5지만, 결과는 소수점이 제거된 2가 나온다.  
+왜냐하면 자바에서 같은 int형끼리 계산하면 결과도 같은 int형을 사용하고, int는 정수만 받기 때문에 소수점 이해를 포함할 수 없다.  
+5 / 2의 몫은 2, 나머지는 1이므로, 나머지 연산자 5 % 2의 결과는 5 / 2의 나머지, 1이 된다.  
+이것은 실무와 알고리즘 모두 종종 사용된다고 한다.  
+
+[문자열 더하기]
+```Java
+package operator;
+
+public class Operator2 {
+    public static void main(String[] args) {
+        // 문자열과 문자열 더하기 1
+        String result1 = "Hello " + "World"; // 'Hello '와 'World'가 합쳐져 result1에는 Hello World가 저장됨
+        System.out.println(result1);
+
+        // 문자열과 문자열 더하기 2
+        String s1 = "string1 ";
+        String s2 = "string2";
+        String result2 = s1 + s2; // s1의 'string1 '과 s2의 'string2'를 result2에 붙여서 넣어서 result2에는 "string1 string2"가 저장됨
+        System.out.println(result2);
+
+        // 문자열과 숫자 더하기 1
+        String result3 = "a + b = " + 10; // 따옴표에 감싸진 'a + b = '과 10이 만나서 result3에는 "a + b = 10"이 저장됨
+        System.out.println(result3);
+        // 자바에서는 문자열 + 숫자는 숫자를 문자열로 바꿔서 실행함. 그래서 a + b = 10이 무사히 성공되는 것
+
+        // 문자열과 숫자 더하기 2
+        int num = 20;
+        String str = "a + b = ";
+        String result4 = str + num;
+        System.out.println(result4);
+    }
+}
+```
+[연산자 우선순위]
+```Java
+package operator;
+
+public class Operator3 {
+    public static void main(String[] args) {
+        int sum1 = 1 + 2 * 3; // 곱셈의 우선순위가 더 높으므로 2*3=6, 6+1=7로 sum1에는 7이 저장됨.
+        int sum2 = (1 + 2) * 3; // 괄호의 우선순위가 더 높으므로, 1+2=3, 3*3=9로 sum2에는 9가 저장됨.
+        System.out.println("sum1 = " + sum1);
+        System.out.println("sum2 = " + sum2);
+    }
+}
+```
+```Java
+package operator;
+
+public class Operator4 {
+    public static void main(String[] args) {
+        int sum3 = 2 * 2 + 3 * 3; // 2*2=4, 3*3=9, 4+9=13으로 13이 저장됨
+        System.out.println("sum3 = " + sum3);
+        int sum4 = (2 * 2) + (3 * 3); // sum3와 같음
+        System.out.println("sum4 = " + sum4);
+    }
+}
+```
+우선순위대로 쓰면  
+
+1. 괄호: ()
+2. 단항 연산자: ++, --, !, ~, new, (type)
+3. 산술 연산자: *, /, % 우선 이후 +, -
+4. Shift 연산자: <<, >>, >>>
+5. 비교 연산자: <, <=, >, >=, instanceof
+6. 등식 연산자: ==, !=
+7. 비트 연산자: &, ^(XOR), |
+8. 논리 연산자: &&, ||
+9. 삼항 연산자: (논리식) ? A : B
+10. 대입 연산지: =, +=, -=, *=, /=, %= 등
+
+외우는 방법:
+1. 상식 선에서 우선순위를 사용
+2. 애매하면 일단 괄호를 사용
+
+[증감 연산자]
+```Java
+package operator;
+
+public class OperatorAdd1 {
+    public static void main(String[] args) {
+        int a = 0;
+        a = a + 1; // a = 0 + 1, a = 1
+        System.out.println("a = " + a);
+        a += 1; // a = 1 + 1, a = 2
+        System.out.println("a = " + a);
+        a++; // a = 2 + 1, a = 3
+        System.out.println("a = " + a);
+        ++a; // a = 3 + 1, a = 4
+        System.out.println("a = " + a);
+    }
+}
+```
+[전위/후위 연산자]  
+++a: 증감 연산자를 피연산자 앞에 둔다. 이것을 앞에 있다고 해서 전위 증감 연산자라 한다. 연산하기 전에 먼저 증감을 해준 뒤 그 값을 연산에 사용한다.  
+a가 4일 때  
+int b = ++a + 3의 결과는 b=(4+1)+3=8이다.  
+
+a++: 증감 연산자를 피연산자 뒤에 둔다. 이것을 뒤에 있다고 해서 후위 증감 연산자라 한다. 연산한 후에 증감을 해줘서, 연산에 사용되는 값은 원래 값이다.  
+a가 4일 때  
+int b = a++ + 3의 결과는 b=4+3=7이다.  
+
+[비교 연산자]  
+두 값을 비교하는 데 사용되고, 주로 후에 배울 조건문과 함께 사용된다.  
+==, !=, >, <, >=, <=  
+이 비교 연산자의 결과로는 참(True), 거짓(False)라는 결과가 나오고, boolean형을 사용한다.  
+여기서 주의할 점은, =과 ==은 다르다.  
+=: 변수에 값을 대입  
+==: 같은지(True), 다른지(False) 확인하는 비교  
+
+[숫자 비교]
+```Java
+package operator;
+
+public class Comp1 {
+    public static void main(String[] args) {
+        int a = 2;
+        int b = 3;
+        System.out.println(a == b);
+        System.out.println(a != b);
+        System.out.println(a > b);
+        System.out.println(a < b);
+        System.out.println(a >= b);
+        System.out.println(a <= b);
+
+        boolean result = a == b;
+        System.out.println("boolean 사용: " + result);
+    }
+}
+```
+
+[문자열 비교]  
+문자열이 같은지 비교할 때는 ==이 아닌 .equals() 메서드를 사용한다.  
+==을 사용하면 성공할 때도 있고 실패할 때도 있는 복불복이 되어버리고, 이걸 알기 위해선 좀 어려우므로, 지금은 단순히 .equals()로 문자열 비교를 한다는 것만 알아두자.  
+
+```Java
+package operator;
+
+public class Comp2 {
+    public static void main(String[] args) {
+        String str1 = "문자열1";
+        String str2 = "문자열2";
+        boolean result1 = "hello".equals("hello");
+        boolean result2 = str1.equals("문자열1");
+        boolean result3 = str1.equals(str2);
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
+        System.out.println("result3 = " + result3);
+    }
+}
+```
+
+[논리 연산자]  
+```Java
+package operator;
+
+public class Logical1 {
+    public static void main(String[] args) {
+        System.out.println("&&: AND 연산");
+        System.out.println(true && true); //1*1=1, true
+        System.out.println(true && false); //1*0=0, false
+        System.out.println(false && false); // 0*0=0, false
+
+        System.out.println("||: OR 연산");
+        System.out.println(true || true); // 1+1=1, true
+        System.out.println(true || false); // 1+0=1, true
+        System.out.println(false || false); // 0+0=0, false
+
+        System.out.println("!: NOT 연산");
+        System.out.println(!true); // 1'=0, false
+        System.out.println(!false); // 0'=1, true
+
+        System.out.println("변수 활용");
+        boolean a = true;
+        boolean b = false;
+        System.out.println(a && b); // 1*0=0, false
+        System.out.println(a || b); // 1+0=1, true
+        System.out.println(!a); // 1'=0, false
+        System.out.println(!b); //0'=1, true
+    }
+}
+```
+&&: 두 피연산자가 모두 참이어야 true를 반환하고, 둘 중 하나라도 거짓이면 false를 반환한다.  
+||: 두 피연산자 중 하나라도 참이면 true를 반환하고, 둘 다 거짓이면 false를 반환한다.  
+!: 피연산자의 논리적 부정을 반환한다. 참이면 거짓을, 거젓이면 참을 반환한다.  
+
+[논리 연산자의 활용]  
+변수 a가 10보다 크고 20보다 작은지 논리 연산자를 사용해서 확인해보자.  
+```Java
+package operator;
+
+public class Logical2 {
+    public static void main(String[] args) {
+        int a = 15;
+        boolean result = a > 10 && a < 20; //(a > 10) && (a < 20)
+        System.out.println("result = " + result);
+    }
+}
+```
+```Java
+package operator;
+
+public class Assign1 {
+    public static void main(String[] args) {
+        int a = 5; // a = 5
+        a += 3; // a = 5 + 3 = 8
+        a -= 2; // a = 8 - 2 = 6
+        a *= 4; // a = 6 * 4 = 24
+        a /= 3; // a = 24 / 3 = 8
+        a %= 5; // a = 8 % 5 = 3
+        System.out.println(a);
+    }
+}
+```
+[문제와 풀이]  
+1번 문제
+1. num1, num2, num3라는 이름의 세 개의 int 변수를 선언하고, 각각 10, 20, 30으로 초기화하세요.
+2. 세 변수의 합을 계산하고, 그 결과를 sum이라는 이름의 int 변수에 저장하세요.
+3. 세 변수의 평균을 계산하고, 그 결과를 average라는 이름의 int 변수에 저장하세요. 또한 평균 계산시 소수점 이하의 결과는 버림하세요.
+4. sum과 average 변수의 값을 출력하세요.
+```Java
+package operator;
+
+public class OperationEx1 {
+    public static void main(String[] args) {
+        int num1 = 10;
+        int num2 = 20;
+        int num3 = 30;
+        int sum = num1+num2+num3;
+        System.out.println("sum = " + sum);
+        int average = sum/3;
+        System.out.println("average = " + average);
+    }
+
+}
+```
+
+2번 문제
+1. val1, val2, val3라는 이름의 세 개의 double 변수를 선언하고, 각각 1.5, 2.5, 3.5로 초기화하세요.
+2. 세 변수의 합을 계산하고, 그 결과를 sum이라는 이름의 double 변수에 저장하세요.
+3. 세 변수의 평균을 계산하고, 그 결과를 average라는 이름의 double 변수에 저장하세요.
+4. sum과 average 변수의 값을 출력하세요.
+```Java
+package operator;
+
+public class OperationEx2 {
+    public static void main(String[] args) {
+        double val1 = 1.5;
+        double val2 = 2.5;
+        double val3 = 3.5;
+        double sum = val1 + val2 + val3;
+        System.out.println("sum = " + sum);
+        double average = sum / 3;
+        System.out.println("average = " + average);
+    }
+}
+```
+
+3번 문제
+1. int형 변수 score를 선언하세요.
+2. score가 80점 이상이고, 100점 이하면 true를 출력하고, 아니면 false를 출력하세요.
+```Java
+package operator;
+
+public class OperationEx3 {
+    public static void main(String[] args) {
+        int score = 80;
+        boolean result = 80 <= score && score <= 100;
+        System.out.println(result);
+    }
+}
+```
+
+[조건문]
+조건문:  
+지금까지 봤던 프로그램은 단순히 위에서 아래로 순서대로 한 줄 씩 실행되었다.  
+조건이 참이냐 거짓이냐로 다른 코드를 실행하려면, 어떻게 해야 할까?  
+예를 들어, 18살 이상은 "성인입니다."를, 이외의 경우에는 "미성년자입니다."를 출력하는 코드는 어떻게 해야 할까?
+
+한국어로만 하면
+```
+만약 (나이 >= 18)면 "성인입니다."
+만약 (나이 < 18)면 "미성년자입니다."
+```
+
+영어로 하면
+```
+if (age >= 18) "성인입니다."
+if (age < 18) "미성년자입니다."
+
+이렇게 특정 조건에 따라 다른 코드를 실행하는 것을 조건문이라고 하고,  
+조건문에는 if문과 switch문이 있는데, 둘 다 특정 조건에 따라 다른 코드를 실행하는 것이라 생각하면 된다.
+
+[if]  
+if문은 특정 조건이 참인지 확인하고, 그 조건이 참일 경우, 코드 블록을 실행하는 코드이다.
+```Java
+package cond;
+
+public class If1 {
+    public static void main(String[] args) {
+        int age = 16; // 사용자 나이
+        if (age >= 18) { // age = 20, 20 >= 18은 true이므로 아래 중괄호{}로 묶인 코드 실행
+            System.out.println("성인입니다.");
+        }
+        if (age < 18) { // age = 20, 20 < 18은 false이므로, 아래 증괄호로 묶인 코드 실행 안 함
+            System.out.println("미성년자입니다.");
+        }
+    }
+}
+```
+[else]
+else문은 if문에서 참이 되는 조건이 없을 때 실행되는 코드를 제공한다.  
+이 else문을 사용하면, 앞의 if문으로만 짤 때와는 달리, 좀 더 간략하게 쓸 수 있다.  
+```Java
+package cond;
+
+public class If2 {
+    public static void main(String[] args) {
+        int age = 16;
+        if (age >= 18) {
+            System.out.println("성인입니다.");
+        }
+        else {
+            System.out.println("미성년자입니다.");
+        }
+    }
+}
+```
+
+[else-if]
+문제: 당신은 연령에 따라 다른 메시지를 출력하는 프로그램을 작성해야 한다.  
+이 프로그램은 int age라는 변수를 사용해야 하며, 연령에 따라 다음의 출력을 해야 한다.
+- 7세 이하의 경우: "미취학"
+- 8세 이상, 13세 이하일 경우: "초등학생"
+- 14세 이상 16세 이하일 경우: "중학생"
+- 17세 이상 19세 이하일 경우: "고등학생"
+- 20세 이상일 경우: "성인"
+```Java
+package cond;
+
+public class If3 {
+    public static void main(String[] args) {
+        int age = 14;
+        if (age <= 7) {
+            System.out.println("미취학");
+        }
+        else if (8 <= age && age <= 13) {
+            System.out.println("초등학생");
+        }
+        else if (14 <= age && age <= 16) {
+            System.out.println("중학생");
+        }
+        else if (17 <= age && age <= 19) {
+            System.out.println("고등학생");
+        }
+        else {
+            System.out.println("성인");
+        }
+    }
+}
+```
+이 코드는 사실 연관성 있는 조건을 두 번 씩 검사한다.  
+예를 들어, 첫 번째 if문과 그 다음의 else if를 봐보자.  
+첫 번째 if문에서 age가 7 이하가 아님을 알았을 때, 우리는 age가 8 이상임을 알 수 있지만,  
+else if문의 조건을 보면, age가 8 이상인지 또 다시 확인하고 있다.  
+이것을 최적화를 해보면  
+```Java
+package cond;
+
+public class If3 {
+    public static void main(String[] args) {
+        int age = 14;
+        if (age <= 7) {
+            System.out.println("미취학");
+        }
+        else if (age <= 13) {
+            System.out.println("초등학생");
+        }
+        else if (age <= 16) {
+            System.out.println("중학생");
+        }
+        else if (age <= 19) {
+            System.out.println("고등학생");
+        }
+        else {
+            System.out.println("성인");
+        }
+    }
+}
+```
+이 된다.
+
+[if, else if]  
+if문에 else if를 함께 사용하는 것은 서로 연관된 조건일 때 사용한다. 그런데 서로 관련 없는 독립 조건이면 else if를 사용하지 않고, if문을 각각 따로 사용해야 한다.
+
+문제: 온라인 쇼핑몰의 할인 시스템을 개발해야 한다. 한 사용자가 어떤 상품을 구매할 때, 다양한 할인 조건에 따라 총 할인 금액이 달라지게 한다.
+각각의 할인 조건은 다음과 같다.
+1. 물품 가격이 10000원 이상일 때, 1000원 할인
+2. 나이가 10살 이하일 때 1000원 할인
+이 할인 시스템의 경우, 한 사용자가 두 개의 할인을 동시에 받을 수 있다.  
+예를 들어, 10살인 사용자가 10000원짜리 물품을 구매할 때, 1번 조건(price >= 10000)에 의해 1000원 할인, 2번 조건(age >= 10)에 의해 1000원 할인으로 총 2000원을 할인받을 수 있고, 다음은 그 코드이다.  
+```Java
+package cond;
+
+public class If5 {그
+    public static void main(String[] args) {
+        int price = 10000;
+        int age = 10;
+        int discount = 0;
+        if (price >= 10000) {
+            discount += 1000;
+            System.out.println("10000원 이상 구매, 1000원 할인");
+        }
+        if(age >= 10) {
+            discount += 1000;
+            System.out.println("어린이 1000원 할인");
+        }
+        System.out.println("총 할인 금액: " + discount + "원");
+    }
+}
+
+```
+보면, price가 10000보다 크거나 같은 것이 참이니까 discount에는 1000이 더해진다.  
+이 다음 age가 10보다 작거나 같은 것이 참이니까 discount에는 1000이 더해져서 총 discount는 2000이 된다.
+
+이번 코드에는 각각 독립된 if이었지만, else if문으로 쓰면, 첫 번째로 충족하는 조건만 할인이 되고, 나머지는 무시된다.  
+따라서 사용자는 이중 할인 혜택을 놓칠 수 있고, 다음은 그 코드이다.
+```Java
+package cond;
+
+public class If6 {
+    public static void main(String[] args) {
+        int price = 10000;
+        int age = 10;
+        int discount = 0;
+        if (price >= 10000) {
+            discount += 1000;
+            System.out.println("10000원 이상 구매, 1000원 할인");
+        }
+        else if (age <= 10) { // 바로 앞 if문이 참이 되므로, 여기 else if문은 실행되지 않음.
+            discount += 1000;
+            System.out.println("어린이 1000원 할인");
+        }
+        else {
+            System.out.println("할인 없음");
+        }
+        System.out.println("총 할인 금액: " + discount + "원");
+    }
+}
+```
+if문을 각각 사용할지, if와 else if, else를 함께 묶어서 사용할 지는 요구 사항에 따라 다르다.  
+둘의 차이를 이해하고 적절하게 사용하면 된다.  
+[switch]
+회원 등급에 따라 다른 쿠폰을 발급하는 프로그램을 작성해야 한다.  
+이 프로그램은 int grade라는 변수를 사용하며, 회원 등급에 따라 다음 표에 맞는 쿠폰을 발급받는다.
+1. grade 1: 쿠폰 1000
+2. grade 2: 쿠폰 2000
+3. grade 3: 쿠폰 3000
+4. 이외 등급: 쿠폰 500
+
+각 쿠폰이 할당된 뒤에는 "발급받은 쿠폰 " + 쿠폰값을 출력해야 한다.  
+예를 들어, 2등급 사용자의 출력 예시는 다음과 같다:  
+발급받은 쿠폰 2000  
+if문을 사용해서 코드를 작성해보자.  
+```Java
+package cond;
+
+public class Switch1 {
+    public static void main(String[] args) {
+        int grade = 2;
+        int coupon;
+        if (grade == 1) {
+            coupon = 1000;
+        }
+        else if (grade == 2) {
+            coupon = 2000;
+        }
+        else if (grade == 3) {
+            coupon = 3000;
+        }
+        else {
+            coupon = 500;
+        }
+        System.out.println("발급받은 쿠폰 " + coupon);
+    }
+}
+```
+이제 배울 switch문은 앞서 배운 if문을 좀 더 편리하게 사용할 수 있는 기능이다.  
+if문은 비교 연산자를 사용해서 같은지 비교해야 하지만, switch문은 단순히 값이 같은지만 비교할 수 있다.  
+switch문은 조건식에 해당하는 특정 값으로 실행할 코드를 선택하고, switch의 형식은 다음과 같다.  
+```Java
+switch (조건식) {
+    case value1:
+        ... // 조건식의 결과 값이 value 1일 때 실행할 코드
+        break;
+    case value2:
+        ... // 조건식의 결과 값이 value 2일 때 실행할 코드
+        break;
+    default:
+        ... // 위 조건식 중 그 어떤 값도 해당하지 않을 때 실행되는 코드 (아마도 else문과 동일)
+```
+이제, 앞서 있었던 등급을 사용해서 쿠폰을 발행하는 코드를 switch문으로 작성하면
+```Java
+package cond;
+
+public class Switch2 {
+    public static void main(String[] args) {
+        int grade = 2;
+        int coupon;
+        switch (grade) {
+            case 1:
+                coupon = 1000;
+                break;
+            case 2:
+                coupon = 2000;
+                break;
+            case 3:
+                coupon = 3000;
+                break;
+            default:
+                coupon = 500;
+                break;
+        }
+        System.out.println("발급받은 쿠폰: " + coupon);
+    }
+}
+```
+으로 작성할 수 있다.
