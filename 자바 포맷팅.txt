@@ -1,0 +1,23 @@
+```Java
+public class nini {
+	public static void main(String[] args) {
+		for (int i = 2; i < 10; i++) {
+			for (int j = 1; j < 10; j++) {
+				System.out.println("%d * %d == %d", i, j, i * j);
+			}
+		}
+	}
+}
+```
+이거는 오류 난다. C 스타일의 포맷팅을 쓰려면 System.out.printf를 써야 한다고 한다. 그래서 위의 코드를 제대로 바꾸면
+```Java
+public class nini {
+	public static void main(String[] args) {
+		for (int i = 2; i < 10; i++) {
+			for (int j = 1; j < 10; j++) {
+				System.out.printf("%d * %d == %d\n", i, j, i * j); // System.out.printf는 C언어의 printf와 비슷하고, 심지어는 마지막에 줄바꿈도 없는 것도 같아서 이것같이 맨 끝에 \n을 붙여줘야 한다. 이걸 잊지 말자.
+			}
+		}
+	}
+}
+```
